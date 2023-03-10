@@ -1,18 +1,18 @@
 package api.user;
 
+import api.GeneraActions;
 import api.User;
 import api.model.user.AuthorizationModel;
 import io.qameta.allure.Allure;
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.Test;
 
-import static org.apache.http.HttpStatus.SC_FORBIDDEN;
-import static org.apache.http.HttpStatus.SC_OK;
+import static org.apache.http.HttpStatus.*;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.*;
 
 @DisplayName("Создание пользователя")
-public class UserCreationTest extends GeneraActions{
+public class UserCreationTest extends GeneraActions {
  /*   int random = new Random().nextInt(10000000);
     private Response user;
     private String mailUser;

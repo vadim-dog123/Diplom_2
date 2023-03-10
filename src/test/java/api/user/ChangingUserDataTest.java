@@ -1,5 +1,6 @@
 package api.user;
 
+import api.GeneraActions;
 import api.User;
 import api.model.user.AuthorizationModel;
 import api.model.user.UserInformationModel;
@@ -9,6 +10,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
+import static org.apache.http.HttpStatus.*;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -41,12 +43,12 @@ public class ChangingUserDataTest extends GeneraActions {
     @Parameterized.Parameters(name = "Изменение {0}, авторизация: {1}")
     public static Object[][] getTestData() {
         final Object[][] objects = {{"почты", true, mailUser + "t", passwordUser, nameUser, 200, true, ""},
-                {"пароля", true, mailUser, passwordUser + "t", nameUser, 200, true, ""},
-                {"имени", true, mailUser, passwordUser, nameUser + "t", 200, true, ""},
-                {"имени", false, mailUser, passwordUser, nameUser + "t", 401, false, "You should be authorised"},
-                {"почты", false, mailUser + "t", passwordUser, nameUser, 401, false, "You should be authorised"},
-                {"пароля", false, mailUser, passwordUser + "t", nameUser, 401, false, "You should be authorised"},
-                {"почты на уже существующую", true, mailSecondUser, passwordUser, nameUser, 403, false, "User with such email already exists"},
+                {"пароля", true, mailUser, passwordUser + "t", nameUser, SC_OK, true, ""},
+                {"имени", true, mailUser, passwordUser, nameUser + "t", SC_OK, true, ""},
+                {"имени", false, mailUser, passwordUser, nameUser + "t",SC_UNAUTHORIZED, false, "You should be authorised"},
+                {"почты", false, mailUser + "t", passwordUser, nameUser, SC_UNAUTHORIZED, false, "You should be authorised"},
+                {"пароля", false, mailUser, passwordUser + "t", nameUser, SC_UNAUTHORIZED, false, "You should be authorised"},
+                {"почты на уже существующую", true, mailSecondUser, passwordUser, nameUser, SC_FORBIDDEN, false, "User with such email already exists"},
         };
         return objects;
     }
@@ -60,7 +62,7 @@ public class ChangingUserDataTest extends GeneraActions {
         Allure.step("Проверка кода ответа");
         userInformation.then().assertThat().statusCode(statusCode);
         Allure.step("Проверка тела ответа");
-        if (statusCode == 200) {
+        if (statusCode == SC_OK) {
             var responseBody = userInformation.getBody().as(UserInformationModel.class);
             assertEquals(responseBody.getUser().getEmail(), mail);
             assertEquals(responseBody.getUser().getName(), name);

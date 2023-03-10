@@ -1,5 +1,6 @@
 package api.user;
 
+import api.GeneraActions;
 import api.User;
 import api.model.user.AuthorizationModel;
 import io.qameta.allure.Allure;
@@ -7,6 +8,8 @@ import io.qameta.allure.junit4.DisplayName;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+
+import static org.apache.http.HttpStatus.*;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.*;
 
@@ -33,9 +36,9 @@ public class UserLoginTest extends GeneraActions {
     @Parameterized.Parameters(name = "Автоизация {0}, логин: {1}, пароль:{2}")
     public static Object[][] getTestData() {
         final Object[][] objects = {
-                {"под cуществующим пользователем", mailUser, passwordUser, 200, true, ""},
-                {"с неверным логином", mailUser + "e", passwordUser, 401, false, "email or password are incorrect"},
-                {"с неверным паролем", mailUser, passwordUser + "e", 401, false, "email or password are incorrect"}
+                {"под cуществующим пользователем", mailUser, passwordUser, SC_OK, true, ""},
+                {"с неверным логином", mailUser + "e", passwordUser, SC_UNAUTHORIZED, false, "email or password are incorrect"},
+                {"с неверным паролем", mailUser, passwordUser + "e", SC_UNAUTHORIZED, false, "email or password are incorrect"}
         };
         return objects;
     }
@@ -46,7 +49,7 @@ public class UserLoginTest extends GeneraActions {
         Allure.step("Проверка кода ответа");
         user.then().assertThat().statusCode(statusCode);
         Allure.step("Проверка тела ответа");
-        if (200 == statusCode) {
+        if (SC_OK == statusCode) {
             var uiqueUser = user.getBody().as(AuthorizationModel.class);
             assertEquals(uiqueUser.getUser().getEmail(), mail);
             assertEquals(uiqueUser.getUser().getName(), nameUser);
