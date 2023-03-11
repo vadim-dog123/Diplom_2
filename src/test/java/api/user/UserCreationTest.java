@@ -1,6 +1,6 @@
 package api.user;
 
-import api.GeneraActions;
+import api.BasicTest;
 import api.User;
 import api.model.user.AuthorizationModel;
 import io.qameta.allure.Allure;
@@ -12,26 +12,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.*;
 
 @DisplayName("Создание пользователя")
-public class UserCreationTest extends GeneraActions {
- /*   int random = new Random().nextInt(10000000);
-    private Response user;
-    private String mailUser;
-    private String passwordUser;
-    private String nameUser;
-
-    @Before
-    public void beforeTest() {
-        mailUser = String.format("mail%d@fvfgv.rtyy", random);
-        passwordUser = String.format("pas%d", random);
-        nameUser = String.format("name%d", random);
-        user = new User().create(mailUser, passwordUser, nameUser);
-    }
-
-    @After
-    public void afterEachTest() {
-        new User().deleteUser(user.getBody().as(AuthorizationModel.class).getAccessToken());
-    }*/
-
+public class UserCreationTest extends BasicTest {
     @Test
     @DisplayName("Проверка создания уникального пользователя")
     public void createUniqueUserTest() {

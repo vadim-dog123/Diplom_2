@@ -1,6 +1,6 @@
 package api.order;
 
-import api.GeneraActions;
+import api.BasicTest;
 import api.Order;
 import api.model.user.AuthorizationModel;
 import io.qameta.allure.Allure;
@@ -12,7 +12,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
 
 @DisplayName("Получение заказов конкретного пользователя")
-public class OrdersFromSpecificUserTest extends GeneraActions {
+public class OrdersFromSpecificUserTest extends BasicTest {
     @Before
     public void before() {
         new Order().create(user.getBody().as(AuthorizationModel.class).getAccessToken(), ingredients);

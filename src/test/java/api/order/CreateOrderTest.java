@@ -1,6 +1,6 @@
 package api.order;
 
-import api.GeneraActions;
+import api.BasicTest;
 import api.Order;
 import api.model.user.AuthorizationModel;
 import io.qameta.allure.Allure;
@@ -12,7 +12,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
 
 @DisplayName("Создание заказа")
-public class CreateOrderTest extends GeneraActions {
+public class CreateOrderTest extends BasicTest {
     @Test
     @DisplayName("C авторизацией и ингредиентами")
     public void createOrderTest() {

@@ -1,6 +1,6 @@
 package api.user;
 
-import api.GeneraActions;
+import api.BasicTest;
 import api.User;
 import api.model.user.AuthorizationModel;
 import api.model.user.UserInformationModel;
@@ -17,7 +17,7 @@ import static org.junit.Assert.assertTrue;
 
 @RunWith(Parameterized.class)
 @DisplayName("Изменение данных пользователя")
-public class ChangingUserDataTest extends GeneraActions {
+public class ChangingUserDataTest extends BasicTest {
 
     private final String text;
     private final boolean isAuthorization;

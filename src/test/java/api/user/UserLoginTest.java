@@ -1,6 +1,6 @@
 package api.user;
 
-import api.GeneraActions;
+import api.BasicTest;
 import api.User;
 import api.model.user.AuthorizationModel;
 import io.qameta.allure.Allure;
@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
 
 @DisplayName("Логин пользователя")
 @RunWith(Parameterized.class)
-public class UserLoginTest extends GeneraActions {
+public class UserLoginTest extends BasicTest {
 
     private final String text;
     private final String mail;
