@@ -7,7 +7,8 @@ import io.qameta.allure.Allure;
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.Test;
 
-import static org.apache.http.HttpStatus.*;
+import static org.apache.http.HttpStatus.SC_FORBIDDEN;
+import static org.apache.http.HttpStatus.SC_OK;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.*;
 
@@ -26,6 +27,7 @@ public class UserCreationTest extends BasicTest {
         assertFalse(uiqueUser.getAccessToken().isBlank());
         assertTrue(uiqueUser.getSuccess());
     }
+
     @Test
     @DisplayName("Проверка создания пользователя, который уже зарегистрирован")
     public void ReCreatingUserTest() {
@@ -33,9 +35,10 @@ public class UserCreationTest extends BasicTest {
         Allure.step("Проверка кода ответа");
         user.then().assertThat().statusCode(SC_FORBIDDEN);
         Allure.step("Проверка тела ответа");
-        user.then().assertThat().body("success",equalTo(false));
-        user.then().assertThat().body("message",equalTo("User already exists"));
+        user.then().assertThat().body("success", equalTo(false));
+        user.then().assertThat().body("message", equalTo("User already exists"));
     }
+
     @Test
     @DisplayName("Проверка проверка отсутствия поля mail")
     public void missingFieldMailTest() {
@@ -43,9 +46,10 @@ public class UserCreationTest extends BasicTest {
         Allure.step("Проверка кода ответа");
         user.then().assertThat().statusCode(SC_FORBIDDEN);
         Allure.step("Проверка тела ответа");
-        user.then().assertThat().body("success",equalTo(false));
-        user.then().assertThat().body("message",equalTo("Email, password and name are required fields"));
+        user.then().assertThat().body("success", equalTo(false));
+        user.then().assertThat().body("message", equalTo("Email, password and name are required fields"));
     }
+
     @Test
     @DisplayName("Проверка проверка отсутствия поля passwor")
     public void missingFieldPasswordTest() {
@@ -53,9 +57,10 @@ public class UserCreationTest extends BasicTest {
         Allure.step("Проверка кода ответа");
         user.then().assertThat().statusCode(SC_FORBIDDEN);
         Allure.step("Проверка тела ответа");
-        user.then().assertThat().body("success",equalTo(false));
-        user.then().assertThat().body("message",equalTo("Email, password and name are required fields"));
+        user.then().assertThat().body("success", equalTo(false));
+        user.then().assertThat().body("message", equalTo("Email, password and name are required fields"));
     }
+
     @Test
     @DisplayName("Проверка проверка отсутствия поля name")
     public void missingFieldNameTest() {
@@ -63,7 +68,7 @@ public class UserCreationTest extends BasicTest {
         Allure.step("Проверка кода ответа");
         user.then().assertThat().statusCode(SC_FORBIDDEN);
         Allure.step("Проверка тела ответа");
-        user.then().assertThat().body("success",equalTo(false));
-        user.then().assertThat().body("message",equalTo("Email, password and name are required fields"));
+        user.then().assertThat().body("success", equalTo(false));
+        user.then().assertThat().body("message", equalTo("Email, password and name are required fields"));
     }
 }

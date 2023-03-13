@@ -42,14 +42,7 @@ public class ChangingUserDataTest extends BasicTest {
 
     @Parameterized.Parameters(name = "Изменение {0}, авторизация: {1}")
     public static Object[][] getTestData() {
-        final Object[][] objects = {{"почты", true, mailUser + "t", passwordUser, nameUser, 200, true, ""},
-                {"пароля", true, mailUser, passwordUser + "t", nameUser, SC_OK, true, ""},
-                {"имени", true, mailUser, passwordUser, nameUser + "t", SC_OK, true, ""},
-                {"имени", false, mailUser, passwordUser, nameUser + "t",SC_UNAUTHORIZED, false, "You should be authorised"},
-                {"почты", false, mailUser + "t", passwordUser, nameUser, SC_UNAUTHORIZED, false, "You should be authorised"},
-                {"пароля", false, mailUser, passwordUser + "t", nameUser, SC_UNAUTHORIZED, false, "You should be authorised"},
-                {"почты на уже существующую", true, mailSecondUser, passwordUser, nameUser, SC_FORBIDDEN, false, "User with such email already exists"},
-        };
+        final Object[][] objects = {{"почты", true, mailUser + "t", passwordUser, nameUser, 200, true, ""}, {"пароля", true, mailUser, passwordUser + "t", nameUser, SC_OK, true, ""}, {"имени", true, mailUser, passwordUser, nameUser + "t", SC_OK, true, ""}, {"имени", false, mailUser, passwordUser, nameUser + "t", SC_UNAUTHORIZED, false, "You should be authorised"}, {"почты", false, mailUser + "t", passwordUser, nameUser, SC_UNAUTHORIZED, false, "You should be authorised"}, {"пароля", false, mailUser, passwordUser + "t", nameUser, SC_UNAUTHORIZED, false, "You should be authorised"}, {"почты на уже существующую", true, mailSecondUser, passwordUser, nameUser, SC_FORBIDDEN, false, "User with such email already exists"},};
         return objects;
     }
 

@@ -17,6 +17,7 @@ public class OrdersFromSpecificUserTest extends BasicTest {
     public void before() {
         new Order().create(user.getBody().as(AuthorizationModel.class).getAccessToken(), ingredients);
     }
+
     @Test
     @DisplayName("Авторизованный пользователь")
     public void authorizedUser() {
@@ -33,6 +34,7 @@ public class OrdersFromSpecificUserTest extends BasicTest {
         order.then().assertThat().body("total", notNullValue());
         order.then().assertThat().body("totalToday", notNullValue());
     }
+
     @Test
     @DisplayName("Авторизованный пользователь")
     public void unauthorizedUser() {

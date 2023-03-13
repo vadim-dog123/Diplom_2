@@ -3,6 +3,7 @@ package api.model.user;
 public class UserModel {
     private String email;
     private String name;
+
     public UserModel(String email, String name) {
         this.email = email;
         this.name = name;

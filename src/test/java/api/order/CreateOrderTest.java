@@ -25,10 +25,11 @@ public class CreateOrderTest extends BasicTest {
         order.then().assertThat().body("order.number", notNullValue());
         order.then().assertThat().body("success", equalTo(true));
     }
+
     @Test
     @DisplayName("Без авторизации")
     public void createOrderWithoutAuthorizationTest() {
-        var order = new Order().create( "", ingredients);
+        var order = new Order().create("", ingredients);
         Allure.step("Проверка кода ответа");
         order.then().assertThat().statusCode(SC_OK);
         Allure.step("Проверка тела ответа");
@@ -36,6 +37,7 @@ public class CreateOrderTest extends BasicTest {
         order.then().assertThat().body("order.number", notNullValue());
         order.then().assertThat().body("success", equalTo(true));
     }
+
     @Test
     @DisplayName("Без ингредиентов")
     public void creatingOrderWithoutIngredients() {
@@ -47,6 +49,7 @@ public class CreateOrderTest extends BasicTest {
         order.then().assertThat().body("success", equalTo(false));
         order.then().assertThat().body("message", equalTo("Ingredient ids must be provided"));
     }
+
     @Test
     @DisplayName("С неверным хешем ингредиентов")
     public void creatingOrderWithInvalidIngredientHash() {

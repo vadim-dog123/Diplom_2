@@ -37,5 +37,4 @@ public class UserCreationModel {
     public void setName(String name) {
         this.name = name;
     }
-
 }

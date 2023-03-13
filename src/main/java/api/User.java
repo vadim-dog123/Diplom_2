@@ -14,47 +14,27 @@ public class User extends RestClient {
 
     @Step("Создание пользователся с данными: email={email}, password={password}, Name={name}")
     public Response create(String email, String password, String name) {
-        return given()
-                .spec(baseSpec())
-                .body(new UserCreationModel(email,password,name))
-                .when()
-                .post(USER_CREATION_PATH);
+        return given().spec(baseSpec()).body(new UserCreationModel(email, password, name)).when().post(USER_CREATION_PATH);
     }
+
     @Step("Получение данных о пользователе")
     public Response getUserInformation(String accessToken) {
-        return given()
-                .spec(baseSpec())
-                .auth().oauth2(accessToken)
-                .when()
-                .get(USER_INFORMATION_PATH);
+        return given().spec(baseSpec()).auth().oauth2(accessToken).when().get(USER_INFORMATION_PATH);
     }
+
     @Step("Oбновление данных о пользователе: email={email}, password={password}, Name={name}")
     public Response patchUserInformation(String accessToken, String email, String name, String password) {
-        return given()
-                .spec(baseSpec())
-                .header("Content-type", "application/json")
-                .auth().oauth2(accessToken)
-                .and()
-                .body(new UserCreationModel(email,password,name))
-                .when()
-                .patch(USER_INFORMATION_PATH);
+        return given().spec(baseSpec()).header("Content-type", "application/json").auth().oauth2(accessToken).and().body(new UserCreationModel(email, password, name)).when().patch(USER_INFORMATION_PATH);
     }
+
     @Step("Удаление пользователя")
     public Response deleteUser(String accessToken) {
-        return given()
-                .spec(baseSpec())
-                .header("Content-type", "application/json")
-                .auth().oauth2(accessToken)
-                .when()
-                .delete(USER_INFORMATION_PATH);
+        return given().spec(baseSpec()).header("Content-type", "application/json").auth().oauth2(accessToken).when().delete(USER_INFORMATION_PATH);
     }
+
     @Step("Авторизация пользователя: email={email}, password={password}")
     public Response authorizationUser(String email, String password) {
-        return given()
-                .spec(baseSpec())
-                .body(new AuthorizationRequestModel(email,password))
-                .when()
-                .post(USER_AUTHORIZATION_PATH);
+        return given().spec(baseSpec()).body(new AuthorizationRequestModel(email, password)).when().post(USER_AUTHORIZATION_PATH);
     }
 
 }

@@ -10,7 +10,6 @@ public class UserInformationModel {
     }
 
     public UserInformationModel() {
-
     }
 
     public boolean isSuccess() {

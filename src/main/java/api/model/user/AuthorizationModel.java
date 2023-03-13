@@ -5,12 +5,14 @@ public class AuthorizationModel {
     private UserModel user;
     private String accessToken;
     private String refreshToken;
+
     public AuthorizationModel(boolean success, UserModel user, String accessToken, String refreshToken) {
         this.success = success;
         this.user = user;
         this.accessToken = accessToken;
         this.refreshToken = refreshToken;
     }
+
     public AuthorizationModel() {
     }
 
